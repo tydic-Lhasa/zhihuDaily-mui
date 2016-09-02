@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>知乎日报</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style type="text/css">
+			
+			.mui-slider{
+				height: 200px;
+			}
+			
+			a img{
+				height: 200px;
+			}
+			
+		</style>
+		
+		
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div id="slider" class="mui-slider" >
+				  <div class="mui-slider-group mui-slider-loop">
+				    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				    <div class="mui-slider-item mui-slider-item-duplicate">
+				      <a href="#">
+				        <img src="http://placehold.it/400x300">
+				      </a>
+				    </div>
+				    <!-- 第一张 -->
+				    <div class="mui-slider-item">
+				      <a href="#">
+				        <img src="http://placehold.it/400x300">
+				      </a>
+				    </div>
+				    <!-- 第二张 -->
+				    <div class="mui-slider-item">
+				      <a href="#">
+				        <img src="http://placehold.it/400x300">
+				      </a>
+				    </div>
+				    <!-- 第三张 -->
+				    <div class="mui-slider-item">
+				      <a href="#">
+				        <img src="http://placehold.it/400x300">
+				      </a>
+				    </div>
+				    <!-- 第四张 -->
+				    <div class="mui-slider-item">
+				      <a href="#">
+				        <img src="http://placehold.it/400x300">
+				      </a>
+				    </div>
+				    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				    <div class="mui-slider-item mui-slider-item-duplicate">
+				      <a href="#">
+				        <img src="http://placehold.it/400x300">
+				      </a>
+				    </div>
+				  </div>
+				  <div class="mui-slider-indicator">
+				    <!--<div class="mui-indicator mui-active"></div>
+				    <div class="mui-indicator"></div>
+				    <div class="mui-indicator"></div>
+				    <div class="mui-indicator"></div>-->
+				  </div>
+				</div>
+				
+				
+				
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+				</ul>
+			</div>
+		</div> 
+		<script src="js/mui.min.js"></script>
+		<script>
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+						//获得slider插件对象
+			var gallery = mui('.mui-slider');
+			gallery.slider({
+			  interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+			});
+			
+			
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 3; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+						//下拉刷新，新纪录插到最前面；
+						table.insertBefore(li, table.firstChild);
+					}
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			var count = 0;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+					var table = document.body.querySelector('.mui-table-view');
+					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+					for (var i = cells.length, len = i + 20; i < len; i++) {
+						var li = document.createElement('li');
+						li.className = 'mui-table-view-cell';
+						li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+						table.appendChild(li);
+					}
+				}, 1500);
+			}
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+//					setTimeout(function() {
+////						mui('#pullrefresh').pullRefresh().pullupLoading();
+//					}, 1000);
+					setTimeout(function() {
+						getLatestNews();
+					}, 1000)
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+		</script>
+		
+		
+		<script type="text/javascript">
+			
+			
+			var getLatestNews = function() {
+				mui.getJSON('http://news-at.zhihu.com/api/3/news/latest',{},function(data){
+		
+				console.log(data);
+//				填充轮播图
+
+				
+				var sliderItems = mui('.mui-slider-item');
+//				gallery.
+				var parent = document.body.querySelector('.mui-slider-group');
+				alert(parent);
+				for (var i = 0; i< sliderItems.length; i++) {
+					var item = sliderItems[i];
+					item.parentNode.removeChild(item);
+					
+					
+				}
+				
+				for (var i = 0; i < data.top_stories.length; i++) {
+
+						var story = data.top_stories[i];
+						var imageUrl = story.image;
+
+						var sliderItem = document.createElement('div');
+						sliderItem.className = 'mui-slider-item';
+						sliderItem.innerHTML = '<a href="#"> <img src=" '+ imageUrl + ' "><p class="mui-slider-title">' + story.title +'</p></a>';
+													
+
+						parent.appendChild(sliderItem);
+					}
+				
+				
+				
+//				填充内容
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body.querySelectorAll('.mui-table-view-cell mui-media');
+				var stories = data.stories;
+				
+				for(var i = 0; i < stories.length; i++) {
+					var li = document.createElement('li');
+					var story = stories[i]
+					var title = story.title;
+					li.className = 'mui-table-view-cell mui-media';				
+					var imgUrl = story.images[0];
+					li.innerHTML = '<a class="mui-navigate-right "><img class="mui-media-object mui-pull-left"  src="' + imgUrl + '"><div class="mui-ellipsis" style="text-align:center; line-height: 250%;"> ' + title + ' </div></a>';
+				
+					li.addEventListener("tap", function() {
+
+						mui.openWindow({
+							url: 'NewsDetail.html',
+				
+						});
+				
+					});
+				
+					table.appendChild(li);
+				}
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(); //refresh completed
+								
+				 			
+				});
+						
+			}
+			
+			
+			
+			
+			
+			
+			
+		</script>
+		
+	</body>
+
+</html>
