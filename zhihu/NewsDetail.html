@@ -9,9 +9,9 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header class="mui-bar mui-bar-nav" id="header">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">新闻详情</h1>
+		    <h1 class="mui-title" id="title">新闻详情</h1>
 		</header>
 		
 		
@@ -23,7 +23,80 @@
 		
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+			
+			var story = null;
+			var requestData = null;
+			window.addEventListener('story',function(event){
+				
+				story = event.detail.story;
+//				alert(story);
+				var title = document.getElementById('title');
+				title.innerHTML = story.title;
+				
+				//移除之前的内容
+				
+//				content.remove()
+				var content = document.body.querySelector('.main-wrap');
+				if (requestData){	
+									
+//					alert(content);
+
+					content.parentNode.removeChild(content);
+				}
+
+				requestNewsDetail(story.id);
+			});
+			
+			
+			
+			
+//			var requestNewsDetail = function () {
+//				
+//				mui.getJSON('http://news-at.zhihu.com/api/3/news/3983436',{},function(data){
+//
+//				console.log(data);
+//
+//				}
+//				
+//			}
+//			
+			function requestNewsDetail (newsID) {
+				
+				var requestUrl = 'http://news-at.zhihu.com/api/3/news/' + newsID;
+				console.log(requestUrl)
+				
+				
+				
+				mui.getJSON(requestUrl,{},function(data){
+					
+					requestData = data;
+	 				console.log(data);
+	 				console.log(data.body)
+	 				console.log(data.css)
+//	 				 document.body.innerHTML =  document.body.innerHTML.replace(data.body);
+//					.innerHTML="已经不是Hello了！";	 				
+	 				
+	 				var header = document.getElementById("header");
+	 				header.insertAdjacentHTML("afterEnd",data.body);
+//	 				document.body.appendChild(data.body)
+	 				
+	 				
+	 				var head = document.getElementsByTagName('HEAD').item(0);
+					var style = document.createElement('link');
+					
+					var cssUrl = data.css[0];
+					
+					style.href = cssUrl;
+					style.rel = 'stylesheet';
+					style.type = 'text/css';
+					head.appendChild(style);
+
+				});
+
+			};
+
+
 		</script>
 	</body>
 

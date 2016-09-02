@@ -1,49 +1,50 @@
 {
-	"index.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"NewsDetail.html"
-		]
-	},
-	"NewsDetail.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"fonts/mui.ttf"
-		],
-		"refer": []
-	},
-	"pullrefresh_main.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"pullrefresh_sub.html",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"pullrefresh_sub.html",
-			"index-menu.html",
-			"offcanvas-drag-left-plus-menu.html"
-		]
-	},
-	"pullrefresh_sub.html": {
-		"resources": [
-			"fonts/mui.ttf",
-			"js/mui.min.js",
-			"css/mui.min.css"
-		],
-		"refer": [
-			"NewsDetail.html"
-		]
-	},
-	"index-menu.html": {
-		"resources": [
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "NewsDetail.html"
+    ]
+  },
+  "NewsDetail.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": []
+  },
+  "pullrefresh_main.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "pullrefresh_sub.html",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "pullrefresh_sub.html",
+      "index-menu.html",
+      "offcanvas-drag-left-plus-menu.html"
+    ]
+  },
+  "pullrefresh_sub.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "NewsDetail.html"
+    ]
+  },
+  "index-menu.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  }
 }
