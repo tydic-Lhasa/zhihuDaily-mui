@@ -191,66 +191,68 @@
 		}
 	},
 	"dependencies": {
-	  "pages": {
-	    "index.html": {
-	      "resources": [
-	        "js/mui.min.js",
-	        "css/mui.min.css"
-	      ],
-	      "refer": [
-	        "NewsDetail.html"
-	      ],
-	      "priority": 0
-	    },
-	    "NewsDetail.html": {
-	      "resources": [
-	        "js/mui.min.js",
-	        "css/mui.min.css",
-	        "fonts/mui.ttf"
-	      ],
-	      "refer": [],
-	      "priority": 0
-	    },
-	    "pullrefresh_main.html": {
-	      "resources": [
-	        "js/mui.min.js",
-	        "css/mui.min.css",
-	        "pullrefresh_sub.html",
-	        "fonts/mui.ttf"
-	      ],
-	      "refer": [
-	        "index-menu.html",
-	        "offcanvas-drag-left-plus-menu.html",
-	        "pullrefresh_sub.html"
-	      ],
-	      "priority": 0
-	    },
-	    "pullrefresh_sub.html": {
-	      "resources": [
-	        "fonts/mui.ttf",
-	        "js/mui.min.js",
-	        "css/mui.min.css"
-	      ],
-	      "refer": [
-	        "NewsDetail.html"
-	      ],
-	      "priority": 0
-	    },
-	    "index-menu.html": {
-	      "resources": [
-	        "js/mui.min.js",
-	        "fonts/mui.ttf",
-	        "css/mui.min.css"
-	      ],
-	      "refer": [],
-	      "priority": 0
-	    }
-	  },
-	  "idle": {
-	    "resources": [
-	      "js/mui.js",
-	      "css/mui.css"
-	    ]
-	  }
+		"pages": {
+			"index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"NewsDetail.html"
+				],
+				"priority": 0
+			},
+			"NewsDetail.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pullrefresh_main.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"pullrefresh_sub.html",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"index-menu.html",
+					"offcanvas-drag-left-plus-menu.html"
+				],
+				"priority": 0
+			},
+			"pullrefresh_sub.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/countdown.js",
+					"js/DP_DateExtensions.js",
+					"img/267×200.png"
+				],
+				"refer": [
+					"NewsDetail.html"
+				],
+				"priority": 0
+			},
+			"index-menu.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/mui.js",
+				"css/mui.css"
+			]
+		}
 	}
 }
