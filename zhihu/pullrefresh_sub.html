@@ -8,89 +8,83 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
-		<script type="text/javascript" src="js/countdown.js" ></script>
+		<script type="text/javascript" src="js/countdown.js"></script>
 		<script src="js/DP_DateExtensions.js" type="text/javascript" charset="utf-8"></script>
-		
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
-			
-			.mui-slider{
+			.mui-slider {
 				height: 200px;
 			}
 			
-			a img{
+			a img {
 				height: 200px;
 			}
 			
-			.mui-table-view-divider{
-				background-color: rgb(7,103,199);
+			.mui-table-view-divider {
+				background-color: rgb(7, 103, 199);
 				color: white;
 			}
-			
-			
 		</style>
-		
-		
+
 	</head>
 
 	<body>
 		<!--下拉刷新容器-->
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div id="slider" class="mui-slider" >
-				  <div class="mui-slider-group mui-slider-loop">
-				    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
-				    <div class="mui-slider-item mui-slider-item-duplicate">
-				      <a href="#">
-				        <img src="img/267×200.png">
-				      </a>
-				    </div>
-				    <!-- 第一张 -->
-				    <div class="mui-slider-item">
-				      <a href="#">
-				        <img src="img/267×200.png">
-				      </a>
-				    </div>
-				    <!-- 第二张 -->
-				    <div class="mui-slider-item">
-				      <a href="#">
-				        <img src="img/267×200.png">
-				      </a>
-				    </div>
-				    <!-- 第三张 -->
-				    <div class="mui-slider-item">
-				      <a href="#">
-				        <img src="img/267×200.png">
-				      </a>
-				    </div>
-				    <!-- 第四张 -->
-				    <div class="mui-slider-item">
-				      <a href="#">
-				        <img src="img/267×200.png">
-				      </a>
-				    </div>
-				    <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
-				    <div class="mui-slider-item mui-slider-item-duplicate">
-				      <a href="#">
-				        <img src="img/267×200.png">
-				      </a>
-				    </div>
-				  </div>
-				  <div class="mui-slider-indicator">
-				    <!--<div class="mui-indicator mui-active"></div>
+				<div id="slider" class="mui-slider">
+					<div class="mui-slider-group mui-slider-loop">
+						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="img/267200.png.png">
+							</a>
+						</div>
+						<!-- 第一张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="img/267200.png.png">
+							</a>
+						</div>
+						<!-- 第二张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="img/267200.png.png">
+							</a>
+						</div>
+						<!-- 第三张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="img/267200.png.png">
+							</a>
+						</div>
+						<!-- 第四张 -->
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="img/267200.png.png">
+							</a>
+						</div>
+						<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="img/267200.png.png">
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<!--<div class="mui-indicator mui-active"></div>
 				    <div class="mui-indicator"></div>
 				    <div class="mui-indicator"></div>
 				    <div class="mui-indicator"></div>-->
-				  </div>
+					</div>
 				</div>
-				
-				
-				
+
 				<!--数据列表-->
-				<ul class="mui-table-view mui-table-view-chevron">
-					
+				<ul class="mui-table-view mui-table-view-chevron" id="app">
+
 				</ul>
 			</div>
-		</div> 
+		</div>
 		<script src="js/mui.min.js"></script>
 		<script>
 			mui.init({
@@ -104,34 +98,30 @@
 						callback: pullupRefresh
 					}
 				},
-				  preloadPages:[{
- 				 	url: 'NewsDetail.html',
-					id: 'NewsDetail'          
- 					 }
- 				 ]
-			
+				preloadPages: [{
+					url: 'NewsDetail.html',
+					id: 'NewsDetail'
+				}]
+
 			});
-			
-						//获得slider插件对象
+
+			//获得slider插件对象
 			var gallery = mui('.mui-slider');
 			gallery.slider({
-			  interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+				interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
 			});
-			
-			
+
 			/**
 			 * 下拉刷新具体业务实现
 			 */
 			function pulldownRefresh() {
- 
-				
- 				
+
 				var today = new Date();
-				
+
 				window.localStorage.removeItem(today.dateFormat("YYYYMMDD"));
 				getLatestNews();
 
-//				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				//				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 
 			}
 			var count = 0;
@@ -139,17 +129,17 @@
 			 * 上拉加载具体业务实现
 			 */
 			function pullupRefresh() {
- 
+
 				localStorage.removeItem("c");
 				requestNextDayNews(latestDate);
 			}
-			if (mui.os.plus) {
+			if(mui.os.plus) {
 				mui.plusReady(function() {
 					setTimeout(function() {
 						mui('#pullrefresh').pullRefresh().pulldownLoading();
 					}, 1);
 
-//					getLatestNews();
+					//					getLatestNews();
 
 				});
 			} else {
@@ -158,171 +148,157 @@
 				});
 			}
 		</script>
-		
-		
+
 		<script type="text/javascript">
-			
 			var lastestData;
 			var latestDate;
-			
-			var newsData= new Array();
-			
-			
-			
+
+			var newsData = new Array();
+
 			var detailPage = mui.preload({
-			  	url:'NewsDetail.html',
-				id:'NewsDetail'
-				
+				url: 'NewsDetail.html',
+				id: 'NewsDetail'
+
 			});
 
-			
-			mui.plusReady(function(){
+			mui.plusReady(function() {
 				detailPage = plus.webview.webv;
-//				alert(detailPage);
+				//				alert(detailPage);
 
 			});
-//			
+			//			
 
-			
 			var getLatestNews = function() {
-				
+
 				var today = new Date();
-				
-				if (window.localStorage[today.dateFormat("YYYYMMDD")] != null) {
-											
+
+				if(window.localStorage[today.dateFormat("YYYYMMDD")] != null) {
+
 					var data = JSON.parse(window.localStorage[today.dateFormat("YYYYMMDD")]);
-					
-//					alert(data);
-//				mui('#pullrefresh').pullRefresh().pulldownLoading();
+
+					//					alert(data);
+					//				mui('#pullrefresh').pullRefresh().pulldownLoading();
 
 					fillLatestData(data);
 
-					
 					return;
-				} 
-				
-				
-				mui.getJSON('http://news-at.zhihu.com/api/3/news/latest',{},function(data){
-				lastestData = data;
-				console.log(data);
-//				填充轮播图
-				fillLatestData(data);
-				});
-						
-			}
-			
-			function fillLatestData (data) {
-//				if (mui('#pullrefresh').pulldownLoading()) {
-//					
-//				}
-//				mui('#pullrefresh').pullRefresh().pulldownRefresh()
+				}
 
-				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); 
+				mui.getJSON('http://news-at.zhihu.com/api/3/news/latest', {}, function(data) {
+					lastestData = data;
+					console.log(data);
+					//				填充轮播图
+					fillLatestData(data);
+				});
+
+			}
+
+			function fillLatestData(data) {
+				//				if (mui('#pullrefresh').pulldownLoading()) {
+				//					
+				//				}
+				//				mui('#pullrefresh').pullRefresh().pulldownRefresh()
+
+				mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
 				var sliderItems = mui('.mui-slider-item');
-//				gallery.
+				//				gallery.
 				var parent = document.body.querySelector('.mui-slider-group');
-//				alert(parent);
-				for (var i = 0; i< sliderItems.length; i++) {
+				//				alert(parent);
+				for(var i = 0; i < sliderItems.length; i++) {
 					var item = sliderItems[i];
 					item.parentNode.removeChild(item);
-					
-					
+
 				}
-				
-				for (var i = 0; i < data.top_stories.length; i++) {
 
-						
-//						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
-//				    <div class="mui-slider-item mui-slider-item-duplicate">
-//				      <a href="#">
-//				        <img src="img/267×200.png">
-//				      </a>
-//				    </div>
-						if (i == 0) {
-							var story = data.top_stories[data.top_stories.length - 1];
-							var imageUrl = story.image;
+				for(var i = 0; i < data.top_stories.length; i++) {
 
-							
-							var sliderItem = document.createElement('div');
-	
-							sliderItem.className = 'mui-slider-item mui-slider-item-duplicate';
-							sliderItem.innerHTML = '<a href="#"> <img src=" '+ imageUrl + ' "><p class="mui-slider-title">' + story.title +'</p></a>';
-							sliderItem.setAttribute('date',data.date);
-							sliderItem.setAttribute('NewsID',story.id);							
-							sliderItem.id = data.top_stories.length - 1;								
-	
-							parent.appendChild(sliderItem);
-						} 
-						
-						var story = data.top_stories[i];
+					//						<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					//				    <div class="mui-slider-item mui-slider-item-duplicate">
+					//				      <a href="#">
+					//				        <img src="img/267×200.png">
+					//				      </a>
+					//				    </div>
+					if(i == 0) {
+						var story = data.top_stories[data.top_stories.length - 1];
 						var imageUrl = story.image;
 
 						var sliderItem = document.createElement('div');
 
-						sliderItem.className = 'mui-slider-item';
-						sliderItem.innerHTML = '<a href="#"> <img src=" '+ imageUrl + ' "><p class="mui-slider-title">' + story.title +'</p></a>';
-						sliderItem.setAttribute('date',data.date);
-						sliderItem.setAttribute('NewsID',story.id);							
-						sliderItem.id = i;							
+						sliderItem.className = 'mui-slider-item mui-slider-item-duplicate';
+						sliderItem.innerHTML = '<a href="#"> <img src=" ' + imageUrl + ' "><p class="mui-slider-title">' + story.title + '</p></a>';
+						sliderItem.setAttribute('date', data.date);
+						sliderItem.setAttribute('NewsID', story.id);
+						sliderItem.id = data.top_stories.length - 1;
 
 						parent.appendChild(sliderItem);
-						
-						if (i == data.top_stories.length - 1) {
-							var story = data.top_stories[0];
-							var imageUrl = story.image;
-	
-							var sliderItem = document.createElement('div');
-							
-							sliderItem.className = 'mui-slider-item mui-slider-item-duplicate';
-							sliderItem.innerHTML = '<a href="#"> <img src=" '+ imageUrl + ' "><p class="mui-slider-title">' + story.title +'</p></a>';
-							sliderItem.setAttribute('date',data.date);
-							sliderItem.setAttribute('NewsID',story.id);							
-							sliderItem.id = 0;
-							parent.appendChild(sliderItem);
-						
-						}
-						
+					}
+
+					var story = data.top_stories[i];
+					var imageUrl = story.image;
+
+					var sliderItem = document.createElement('div');
+
+					sliderItem.className = 'mui-slider-item';
+					sliderItem.innerHTML = '<a href="#"> <img src=" ' + imageUrl + ' "><p class="mui-slider-title">' + story.title + '</p></a>';
+					sliderItem.setAttribute('date', data.date);
+					sliderItem.setAttribute('NewsID', story.id);
+					sliderItem.id = i;
+
+					parent.appendChild(sliderItem);
+
+					if(i == data.top_stories.length - 1) {
+						var story = data.top_stories[0];
+						var imageUrl = story.image;
+
+						var sliderItem = document.createElement('div');
+
+						sliderItem.className = 'mui-slider-item mui-slider-item-duplicate';
+						sliderItem.innerHTML = '<a href="#"> <img src=" ' + imageUrl + ' "><p class="mui-slider-title">' + story.title + '</p></a>';
+						sliderItem.setAttribute('date', data.date);
+						sliderItem.setAttribute('NewsID', story.id);
+						sliderItem.id = 0;
+						parent.appendChild(sliderItem);
+
+					}
+
 				}
-				
-				mui(".mui-slider-group").on('tap','.mui-slider-item',function(){
-						var NewsDate = this.getAttribute("date");
 
-						var stories = JSON.parse(window.localStorage[NewsDate]).top_stories;
-						
-						var story = stories[this.id];
-						console.log(stories)
-						var storyID = story.id;
-						
-						if (!detailPage) {
-							
-							
-							detailPage = plus.webview.getWebviewById('NewsDetail');
-//							alert(detailPage);
+				mui(".mui-slider-group").on('tap', '.mui-slider-item', function() {
+					var NewsDate = this.getAttribute("date");
 
-						}
-						
-						
-						//获得详情页面
-  				
-					  	mui.fire(detailPage,'story',{
-							
-							
-  						  story:story
- 						});	
+					var stories = JSON.parse(window.localStorage[NewsDate]).top_stories;
 
-						setTimeout(function () {
-	 							detailPage = mui.openWindow({
-								    id:'NewsDetail',
-	   								 url:'NewsDetail.html'
-	
-								});
-	 						},50);
-				}) 
-				
-//				填充内容
+					var story = stories[this.id];
+					console.log(stories)
+					var storyID = story.id;
+
+					if(!detailPage) {
+
+						detailPage = plus.webview.getWebviewById('NewsDetail');
+						//							alert(detailPage);
+
+					}
+
+					//获得详情页面
+
+					mui.fire(detailPage, 'story', {
+
+						story: story
+					});
+
+					setTimeout(function() {
+						detailPage = mui.openWindow({
+							id: 'NewsDetail',
+							url: 'NewsDetail.html'
+
+						});
+					}, 50);
+				})
+
+				//				填充内容
 				var table = document.body.querySelector('.mui-table-view');
-				
-//								<li class="mui-table-view-divider">模板</li>
+
+				//								<li class="mui-table-view-divider">模板</li>
 				var li = document.createElement('li');
 				li.className = 'mui-table-view-divider';
 				li.innerHTML = data.date;
@@ -330,250 +306,240 @@
 
 				var cells = document.body.querySelectorAll('.mui-table-view-cell mui-media');
 				var stories = data.stories;
-				
-				var year = data.date.substring(0,4);
-				var month = data.date.substring(4,6);
-				var day = data.date.substring(6,8);
 
-//				alert(year+month+day);
-				latestDate = new Date(year,month-1,day); 
-//				alert(latestDate)
+				var year = data.date.substring(0, 4);
+				var month = data.date.substring(4, 6);
+				var day = data.date.substring(6, 8);
+
+				//				alert(year+month+day);
+				latestDate = new Date(year, month - 1, day);
+				//				alert(latestDate)
 				//字典插入数据
 				var dataStr = JSON.stringify(data);
 				window.localStorage[data.date] = dataStr;
-//				newsData[data.date] = data;
-
+				//				newsData[data.date] = data;
 
 				for(var i = 0; i < stories.length; i++) {
 					var li = document.createElement('li');
 					var story = stories[i]
 					var title = story.title;
 					li.id = i;
-					li.className = 'mui-table-view-cell mui-media';				
+					li.className = 'mui-table-view-cell mui-media';
 					var imgUrl = story.images[0];
 					li.innerHTML = '<a class="mui-navigate-right "><img class="mui-media-object mui-pull-left"  src="' + imgUrl + '"><div class="mui-ellipsis" style="text-align:center; line-height: 250%;"> ' + title + ' </div></a>';
-					li.setAttribute('date',data.date);
-					li.setAttribute('NewsID',story.id);
-					
+					li.setAttribute('date', data.date);
+					li.setAttribute('NewsID', story.id);
+
 					li.addEventListener("tap", function() {
-						
+
 						var NewsDate = this.getAttribute("date");
 
 						var stories = JSON.parse(window.localStorage[NewsDate]).stories;
-						
+
 						var story = stories[this.id];
 						console.log(stories)
 						var storyID = story.id;
-						
-						if (!detailPage) {
-							
-							
+
+						if(!detailPage) {
+
 							detailPage = plus.webview.getWebviewById('NewsDetail');
-//							alert(detailPage);
+							//							alert(detailPage);
 
 						}
-						
-						
-						//获得详情页面
-  				
-					  	mui.fire(detailPage,'story',{
-							
-							
-  						  story:story
- 						});	
 
-						setTimeout(function () {
-	 							detailPage = mui.openWindow({
-								    id:'NewsDetail',
-	   								 url:'NewsDetail.html'
-	
-								});
-	 						},50);
-				
+						//获得详情页面
+
+						mui.fire(detailPage, 'story', {
+
+							story: story
+						});
+
+						setTimeout(function() {
+							detailPage = mui.openWindow({
+								id: 'NewsDetail',
+								url: 'NewsDetail.html'
+
+							});
+						}, 50);
+
 					});
-				
+
 					table.appendChild(li);
 				}
-//				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed								
-				 			
-				
+				//				mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed								
+
 			}
-			
-			
-			
-			function requestNextDayNews (date) {
-//				var thisMonth = (date.getMonth() + 1).toString().length == 1 ? '0' + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString() ;
-//				var thisDate = (date.getDate() + 1).toString().length == 1 ? '0' + (date.getDate() ).toString() : (date.getDate() ).toString() 
-//				var dateString = date.getFullYear().toString() + thisMonth + thisDate;
-//				console.log(date.toDateString());
- 
-				
-				var requestUrl = 'http://news.at.zhihu.com/api/3/news/before/' +  date.dateFormat("YYYYMMDD");
- 
+
+			function requestNextDayNews(date) {
+				//				var thisMonth = (date.getMonth() + 1).toString().length == 1 ? '0' + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString() ;
+				//				var thisDate = (date.getDate() + 1).toString().length == 1 ? '0' + (date.getDate() ).toString() : (date.getDate() ).toString() 
+				//				var dateString = date.getFullYear().toString() + thisMonth + thisDate;
+				//				console.log(date.toDateString());
+
+				var requestUrl = 'http://news.at.zhihu.com/api/3/news/before/' + date.dateFormat("YYYYMMDD");
+
 				var MyFormattedDate = Date.parseIso8601(new Date());
 
 				var nextDate = new Date();
 				nextDate.setTime(date.getTime());
 
 				nextDate.setDate(nextDate.getDate() - 1);
-				
-				var MyFormattedDate = nextDate.dateFormat("YYYYMMDD"); 
-				if (window.localStorage[MyFormattedDate] != null) {
-						
-						
-						console.log("缓存数据")
-						var data = JSON.parse(window.localStorage[MyFormattedDate]);
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-						var table = document.body.querySelector('.mui-table-view');
-						var stories = data.stories;
-						//字典插入数据
-						var dataStr = JSON.stringify(data);
-						window.localStorage[data.date] = dataStr;
-//								<li class="mui-table-view-divider">模板</li>
-						var li = document.createElement('li');
-						li.className = 'mui-table-view-divider';
-						li.innerHTML = data.date;
-						table.appendChild(li);
-						
-						
-						var year = data.date.substring(0,4);
-						var month = data.date.substring(4,6);
-						var day = data.date.substring(6,8);
-		
-//						alert(year+month+day);
-						latestDate = new Date(year,month-1,day); 
-						for(var i = 0; i < stories.length; i++) {
+
+				var MyFormattedDate = nextDate.dateFormat("YYYYMMDD");
+				if(window.localStorage[MyFormattedDate] != null) {
+
+					console.log("缓存数据")
+					var data = JSON.parse(window.localStorage[MyFormattedDate]);
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+					var table = document.body.querySelector('.mui-table-view');
+					var stories = data.stories;
+					//字典插入数据
+					var dataStr = JSON.stringify(data);
+					window.localStorage[data.date] = dataStr;
+					//								<li class="mui-table-view-divider">模板</li>
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-divider';
+					li.innerHTML = data.date;
+					table.appendChild(li);
+
+					var year = data.date.substring(0, 4);
+					var month = data.date.substring(4, 6);
+					var day = data.date.substring(6, 8);
+
+					//						alert(year+month+day);
+					latestDate = new Date(year, month - 1, day);
+					for(var i = 0; i < stories.length; i++) {
 						var li = document.createElement('li');
 						var story = stories[i]
 						var title = story.title;
 						li.id = i;
-						li.className = 'mui-table-view-cell mui-media';				
+						li.className = 'mui-table-view-cell mui-media';
 						var imgUrl = story.images[0];
 						li.innerHTML = '<a class="mui-navigate-right "><img class="mui-media-object mui-pull-left"  src="' + imgUrl + '"><div class="mui-ellipsis" style="text-align:center; line-height: 250%;"> ' + title + ' </div></a>';
-						li.setAttribute('date',data.date);
-						li.setAttribute('NewsID',story.id);
+						li.setAttribute('date', data.date);
+						li.setAttribute('NewsID', story.id);
 						li.addEventListener("tap", function() {
-							
+
 							var NewsDate = this.getAttribute("date");
 
 							var stories = JSON.parse(window.localStorage[NewsDate]).stories;
-						
-							var story = stories[this.id];	
+
+							var story = stories[this.id];
 							console.log(stories)
 							var storyID = story.id;
- 
-							if (!detailPage) {
-								
-								
+
+							if(!detailPage) {
+
 								detailPage = plus.webview.getWebviewById('NewsDetail');
-	//							alert(detailPage);
-	
+								//							alert(detailPage);
+
 							}
-							
-							
+
 							//获得详情页面
-	  				
-						  	mui.fire(detailPage,'story',{
-								
-								
-	  						  story:story
-	 						});
-	 						
-	 						setTimeout(function () {
-	 							detailPage = mui.openWindow({
-								    id:'NewsDetail',
-	   								 url:'NewsDetail.html'
-	
+
+							mui.fire(detailPage, 'story', {
+
+								story: story
+							});
+
+							setTimeout(function() {
+								detailPage = mui.openWindow({
+									id: 'NewsDetail',
+									url: 'NewsDetail.html'
+
 								});
-	 						},50);
-							
-							
-	
+							}, 50);
+
 						});
-					
+
 						table.appendChild(li);
 					}
 					return;
 				}
 
+				mui.getJSON(requestUrl, {}, function(data) {
+					//						console.log(data);
+					//						alert(data);
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh();
+					var table = document.body.querySelector('.mui-table-view');
+					var stories = data.stories;
+					//字典插入数据
+					var dataStr = JSON.stringify(data);
+					window.localStorage[data.date] = dataStr;
+					//								<li class="mui-table-view-divider">模板</li>
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-divider';
+					li.innerHTML = data.date;
+					table.appendChild(li);
 
-				mui.getJSON(requestUrl,{},function(data) {
-//						console.log(data);
-//						alert(data);
-						mui('#pullrefresh').pullRefresh().endPullupToRefresh();
-						var table = document.body.querySelector('.mui-table-view');
-						var stories = data.stories;
-						//字典插入数据
-						var dataStr = JSON.stringify(data);
-						window.localStorage[data.date] = dataStr;
-//								<li class="mui-table-view-divider">模板</li>
-						var li = document.createElement('li');
-						li.className = 'mui-table-view-divider';
-						li.innerHTML = data.date;
-						table.appendChild(li);
-						
-						
-						var year = data.date.substring(0,4);
-						var month = data.date.substring(4,6);
-						var day = data.date.substring(6,8);
-		
-//						alert(year+month+day);
-						latestDate = new Date(year,month-1,day); 
-						for(var i = 0; i < stories.length; i++) {
+					var year = data.date.substring(0, 4);
+					var month = data.date.substring(4, 6);
+					var day = data.date.substring(6, 8);
+
+					//						alert(year+month+day);
+					latestDate = new Date(year, month - 1, day);
+					for(var i = 0; i < stories.length; i++) {
 						var li = document.createElement('li');
 						var story = stories[i]
 						var title = story.title;
 						li.id = i;
-						li.className = 'mui-table-view-cell mui-media';				
+						li.className = 'mui-table-view-cell mui-media';
 						var imgUrl = story.images[0];
 						li.innerHTML = '<a class="mui-navigate-right "><img class="mui-media-object mui-pull-left"  src="' + imgUrl + '"><div class="mui-ellipsis" style="text-align:center; line-height: 250%;"> ' + title + ' </div></a>';
-						li.setAttribute('date',data.date);
-						li.setAttribute('NewsID',story.id);
+						li.setAttribute('date', data.date);
+						li.setAttribute('NewsID', story.id);
 						li.addEventListener("tap", function() {
-							
+
 							var NewsDate = this.getAttribute("date");
 
 							var stories = JSON.parse(window.localStorage[NewsDate]).stories;
-						
-							var story = stories[this.id];	
+
+							var story = stories[this.id];
 							console.log(stories)
 							var storyID = story.id;
- 
-							if (!detailPage) {
-								
-								
+
+							if(!detailPage) {
+
 								detailPage = plus.webview.getWebviewById('NewsDetail');
-	//							alert(detailPage);
-	
+								//							alert(detailPage);
+
 							}
-							
-							
+
 							//获得详情页面
-	  				
-						  
-						
-							mui.fire(detailPage,'story',{
-								
-								
-	  						  story:story
-	 						});	
-							setTimeout(function () {
-	 							detailPage = mui.openWindow({
-								    id:'NewsDetail',
-	   								 url:'NewsDetail.html'
-	
+
+							mui.fire(detailPage, 'story', {
+
+								story: story
+							});
+							setTimeout(function() {
+								detailPage = mui.openWindow({
+									id: 'NewsDetail',
+									url: 'NewsDetail.html'
+
 								});
-	 						},50);
+							}, 50);
 						});
-					
+
 						table.appendChild(li);
 					}
 				});
-				
+
 			}
-			
+
+			new Vue({
+				el: '#app',
+				data: {
+					todos: [{
+						text: '菜鸟教程'
+					}, {
+						text: 'www.runoob.com'
+					}, {
+						text: 'www.w3cschool.cc'
+					}]
+				}
+			});
 		</script>
-		
+
 	</body>
 
 </html>

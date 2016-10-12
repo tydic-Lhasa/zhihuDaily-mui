@@ -7,10 +7,17 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/mui.min.css">
+
 		<style type="text/css">
 			body,.mui-content{
 			  	background-color: #333;
 			  	color:#fff;
+			  	padding-top: 52px;
+
+			  }
+			  
+			  .mui-bar{
+			  	background-color: #333; height: 120px; top: 0px;
 			  }
 			  .title{
 			  	margin: 35px 15px 10px;
@@ -18,20 +25,100 @@
 			  .title+.content{
 			  	margin: 10px 15px 35px;
 			  	color: #bbb;
-			  	text-indent: 1em;
+			  	text-indent: 2em;
 			  	font-size: 14px;
 			  	line-height: 24px;
 			  }
 			  .mui-table-view{
 			  	margin-bottom: 35px;
 			  }
+			  
+			  .user .avatar{
+			  	width: 40px;
+			  	height: 40px;
+			  	margin-top: 20px;
+			  	margin-left: 10px;
+			  	border-radius:20px;
+			  	display:inline-block;
+				vertical-align:bottom;
+			  }
+			  .user .username{
+/*			  		margin: 10px 15px 35px;
+*/			  	color: #bbb;
+			  	/*text-indent: 1em;*/
+			  	font-size: 14px;
+			  	/*margin: auto;*/
+			  				  	/*margin-top: 20px;*/
+				text-align:left;
+			  	margin-left: 15px;
+			  	line-height: 40px;
+			  	height: 40px;
+			  	/*width: 180px;*/
+			  	display:inline-block;
+			  	/*background-color: red;*/
+			  }
+			  
+			  .toolButton{
+			  	position: relative;
+			  	width: 20px;
+			  	height: 40px;
+			  	margin-top: 15px;
+			  	margin-left: 20px;
+			  	margin-right: 20px;
+
+			  	display: inline-block;
+			  	/*background-color: red;*/
+			  	/*float: left;*/
+			  }
+			  
+			  .toolButton img{
+			  	vertical-align:middle;
+			  	width: 20px;
+			  	height: 20px;
+			  }
+			  
+			  .toolButton span{
+			  	width: 20px; 
+			  	position: absolute; 
+			  	top: 20px; 
+			  	left: 0; 
+			  	font-size: 7px; 
+			  	text-align: center; 
+			  	color: #bbb;
+			  }
 		</style>
 	</head>
 
 	<body>
+		<header class="mui-bar">
+		  
+			<div class="user">
+					<img class="avatar" src="img/AccountAvatar.png"/><a class="username" href="login.html" open-type="common">请登录</a>
+					
+					
+			</div>
+				<div class="tools">
+				<div class="toolButton">
+					<img src="img/DarkMenuIconCollect.png" />
+					<span id="">收藏</span>
+				</div>
+				<div class="toolButton">
+					<img src="img/DarkMenuIconMessage.png" />
+					<span id="" style="">消息</span>
+				</div>
+				<div class="toolButton">
+					<img src="img/DarkMenuIconSetting.png" />
+					<span id="" style="">设置</span>
+				</div>
+				</div>
+		</header>
+
+			
 		<div class="mui-content">
-			<div class="title">侧滑导航</div>
-			<div class="content">
+			
+				
+			<!--<div class="title">还咩弄完呀╮(╯_╰)╭</div>-->
+			<!--<div class="content">
 				这是首页侧滑导航示例，你可以在这里放置任何内容；关闭侧滑菜单有多种方式：
 				1.点击本侧滑菜单页之外的任意位置;
 				2.点击如下红色按钮<span id="android-only">；3.Android手机按back键；4.Android手机按menu键
@@ -41,38 +128,38 @@
 				</p>
 				
 			</div>
-			<div class="title" style="margin-bottom: 25px;">mui典型控件</div>
+			<div class="title" style="margin-bottom: 25px;">mui典型控件</div>-->
 			<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted" style="color: #ddd;">
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" open-type="common" href="examples/pullrefresh_main.html">
-						下拉刷新
-					</a>
+					<a class="mui-navigate-right" open-type="common" href="login.html">首页</a>
+
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" open-type="common" href="examples/offcanvas-drag-left.html">
-						侧滑导航
-					</a>
+					<a class="mui-navigate-right" open-type="common" href="login.html">首页</a>
+
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="examples/switches.html">
-						开关控件
-					</a>
+					<a class="mui-navigate-right" open-type="common" href="login.html">首页</a>
+
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="examples/tableviews-with-swipe.html">
-						列表左滑菜单
-					</a>
+					<a class="mui-navigate-right" open-type="common" href="login.html">首页</a>
+
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="examples/tab-with-viewpagerindicator.html">
-						可拖动式选项卡
-					</a>
+					<a class="mui-navigate-right" open-type="common" href="login.html">首页</a>
+
 				</li>
 			</ul>
 		</div>
 		<script src="js/mui.min.js"></script>
+		<script src="js/mui.enterfocus.js"></script>
+		<script src="js/app.js"></script>
+
 		<script type="text/javascript" charset="utf-8">
 			var aniShow = "slide-in-right";
+			var auths=null;
+
 			//关于backbutton和menubutton两个按键的说明，在iOS平台不存在，故需隐藏
 			if(!mui.os.android){
 				var span = document.getElementById("android-only")
@@ -82,11 +169,31 @@
 				aniShow = "pop-in";
 			}
 			var subWebview=null,template=null,index=null;
+			
+			mui.init(function () {
+				var settings = app.getSettings();
+
+			})
+			
+			
 			mui.plusReady(function () {
 				//获得主页面webview引用；
 				index = plus.webview.currentWebview().opener();
+				plus.oauth.getServices(function (services) {
+							auths = services;
+							console.log(auths + "ss");
+//							alert();
+							authUserInfo();
+				}, function (e) {
+					
+				});
+				
+				
 			})
-			mui('.mui-table-view').on('tap', 'a', function() {
+			mui('.mui-table-view').on('tap', 'a', buttonAction);
+			mui('.user').on('tap', 'a', buttonAction);
+
+			function buttonAction() {
 				var id = this.getAttribute("href");
 				var type = this.getAttribute("open-type");
 				var href = this.href;
@@ -121,7 +228,7 @@
 					}
 					template.show('slide-in-right', 150);
 				}
-			});
+			}
 			
 			/**
 			 * 关闭侧滑菜单
@@ -129,9 +236,61 @@
 			function close() {
 				mui.fire(mui.currentWebview.opener(),"menu:close");
 			}
-			
+			// 获取登录用户信息操作
+			function authUserInfo(){
+				var s = null;
+				for (var i=0; i < auths.length; i++) {
+					var current = auths[i];
+					if (current.id == 'sinaweibo') {
+						s = current;
+					}
+				}
+				
+				
+				var dataStr = JSON.stringify(s);
+				console.log(dataStr);
+//				console.log(s)
+				var weiboAuth = JSON.parse(window.localStorage['sinaweibo']);
+				console.log(window.localStorage['sinaweibo']);
+
+				if (!weiboAuth.authResult) {
+					weiboAuth.login( function(e){
+//							alert( "登录认证成功！" );
+								var dataStr = JSON.stringify(e);
+										console.log(dataStr);
+										
+								
+							var username = document.getElementsByClassName("username")[0];		
+	 						var userInfo = e.target.userInfo;
+	//						console.log(state)
+							username.innerHTML = userInfo.name;	
+	//						authUserInfo();	
+							
+							var avatar = document.getElementsByClassName("avatar")[0];
+							avatar.src = userInfo.profile_image_url;		
+						}, function(e){
+							alert( "登录认证失败！" );
+						} );
+				} else {
+					s.getUserInfo( function(e){
+//						alert( "获取用户信息成功："+JSON.stringify(s.userInfo) );
+						
+						var username = document.getElementsByClassName("username")[0];		
+ 						var userInfo = s.userInfo;
+//						console.log(state)
+						username.innerHTML = userInfo.name;	
+//						authUserInfo();	
+						
+						var avatar = document.getElementsByClassName("avatar")[0];
+						avatar.src = userInfo.profile_image_url;
+						
+					}, function(e){
+						alert( "获取用户信息失败："+e.message+" - "+e.code );
+					} );
+				}
+			}
 			//点击“关闭侧滑菜单”按钮处理逻辑
-			document.getElementById("close-btn").addEventListener("tap",close);
+//			document.getElementById("close-btn").addEventListener("tap",close);
 			//在android4.4.2中的swipe事件，需要preventDefault一下，否则触发不正常
 			window.addEventListener('dragstart',function(e){
 				mui.gestures.touch.lockDirection = true; //锁定方向
@@ -147,6 +306,22 @@
 				if(Math.abs(e.detail.angle)>170){
 					close();						
 				}
+			});
+			//登录成功刷新页面
+			window.addEventListener("loginSuccess", function() {
+//					var username = document.getElementsByClassName("username")[0];		
+////					username.innerHTML = '123';	
+//					var state = app.getState();
+//					console.log(state)
+//					username.innerHTML = state.account;	
+				plus.oauth.getServices(function (services) {
+							
+						auths = services;
+						console.log(auths + "ss");
+						authUserInfo();
+				}, function (e) {
+					
+				});
 			});
 		</script>
 	</body>
